@@ -4,7 +4,7 @@ Real-Time Multi-State Sales &amp; Commission Tracking System for External Sales 
 
   **Click on the[Looker Studio dashboard link](https://datastudio.google.com/u/0/reporting/9412be12-7f6c-498b-8989-8d115f9481cf/page/p_i74ejzmurd/edit) to view the Dashboard**
 
-Management reviews live performance via the Looker Studio dashboard link - no manual report compilation needed.
+
 # Business Problem
 
 MCG works with a network of external sales agents spread across six Nigerian states (Ogun, Oyo, Ondo, Osun, Ekiti, Kwara) plus Lagos, who sell health insurance and related products on an indirect, commission-earning basis. Before this system existed, several operational gaps limited visibility and control:
