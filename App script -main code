@@ -1,0 +1,83 @@
+function setupAndMergeSheetsWithEnhancements() {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var masterSheet = ss.getSheetByName("Master");
+    var logSheet = ss.getSheetByName("Merge Log") || ss.insertSheet("Merge Log");
+    var sheetNames = ["Ogun State", "Oyo State", "Ondo State", "Osun State", "Ekiti State", "Kwara State", "Lagos State"];
+
+    // Auto-detect header on Master
+    var header = masterSheet.getRange(1, 1, 1, masterSheet.getLastColumn()).getValues()[0];
+    masterSheet.getRange("A2:Z").clearContent();
+
+    var seen = new Set();
+    var allDataToAppend = [];
+    var mergeMeta = [];
+
+    sheetNames.forEach(function(sheetName) {
+      var sheet = ss.getSheetByName(sheetName);
+      if (!sheet) return;
+
+      var lastRow = sheet.getLastRow();
+      var lastCol = sheet.getLastColumn();
+
+      if (lastRow <= 1) {
+        Logger.log(`Skipping "${sheetName}" — no data rows found.`);
+        return;
+      }
+
+      var data = sheet.getRange(2, 1, lastRow - 1, lastCol).getValues();
+      var validRows = 0;
+
+      // Apply date validation to column B
+      var dateRange = sheet.getRange(2, 2, data.length, 1);
+      var rule = SpreadsheetApp.newDataValidation().requireDate().setAllowInvalid(false).build();
+      dateRange.setDataValidation(rule);
+      dateRange.setNumberFormat("dd/MM/yyyy");
+
+      data.forEach(function(row) {
+        var sn = row[0];
+        var date = row[1];
+        var agentName = row[2];
+        var productName = row[7];
+
+        if (!date || !(date instanceof Date)) return; // skip invalid/missing dates
+
+        var uniqueKey = sn + "_" + Utilities.formatDate(new Date(date), ss.getSpreadsheetTimeZone(), "yyyy-MM-dd") + "_" + productName + "_" + agentName;
+
+        if (!seen.has(uniqueKey)) {
+          seen.add(uniqueKey);
+
+          var currentDate = new Date(date);
+          var year = currentDate.getFullYear();
+          var month = currentDate.getMonth();
+          var monthName = Utilities.formatDate(currentDate, ss.getSpreadsheetTimeZone(), "MMMM");
+          var quarter = "Q" + (Math.floor(month / 3) + 1);
+          var week = Utilities.formatDate(currentDate, ss.getSpreadsheetTimeZone(), "w");
+
+          row.push(year, monthName, quarter, week);
+          allDataToAppend.push(row);
+          validRows++;
+        }
+      });
+
+      mergeMeta.push([new Date(), sheetName, validRows]);
+    });
+
+    if (allDataToAppend.length > 0) {
+      var startRow = 2;
+      masterSheet.getRange(startRow, 1, allDataToAppend.length, allDataToAppend[0].length).setValues(allDataToAppend);
+      masterSheet.getRange("B2:B" + (startRow + allDataToAppend.length - 1)).setNumberFormat("dd/MM/yyyy");
+    }
+
+    // Log the merge metadata
+    if (logSheet.getLastRow() === 0) {
+      logSheet.appendRow(["Timestamp", "Sheet", "Rows Merged"]);
+    }
+    mergeMeta.forEach(log => logSheet.appendRow(log));
+
+    sendNotificationEmail(true, `Sheets merged successfully. Total new rows added: ${allDataToAppend.length}`);
+  } catch (error) {
+    Logger.log("Error: " + error);
+    sendNotificationEmail(false, error.toString());
+  }
+}
