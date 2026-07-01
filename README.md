@@ -52,11 +52,11 @@ Each state (Ogun, Oyo, Ondo, Osun, Ekiti, Kwara, Lagos) has its own protected ta
 
 ### 2. Dynamic Commission Engine
 I placed every sales row to calculate its own commission through a single nested formula that branches on three variables at once:
-- **Product** — All Health product variants, Life Insurance, motor comprehensive/third-party, Fire & Burglary, GIT, Marine, Credit Life, and more
-- **Purchase Type** — New Purchase vs. Renewals (new business earns a materially higher rate)
-- **Payment Duration** — Monthly, Quarterly, Bi-annual, or Annual
+- **Product** - All Health product variants, Life Insurance, motor comprehensive/third-party, Fire & Burglary, GIT, Marine, Credit Life, and more
+- **Purchase Type** - New Purchase vs. Renewals (new business earns a materially higher rate)
+- **Payment Duration** - Monthly, Quarterly, Bi-annual, or Annual
 
-For annual, bi-annual,and quarterly **New Purchases**, the formula blends the first billing period at the "new business" rate with the remaining periods at the "renewal" rate — because only the first cycle represents genuinely new business, even though the customer paid for a full year upfront. This is the piece that used to be done manually per policy. Although business subscribing just for 1 month have a filter that can help them indicate if its a renewal or new purchase
+For annual, bi-annual,and quarterly **New Purchases**, the formula blends the first billing period at the "new business" rate with the remaining periods at the "renewal" rate - because only the first cycle represents genuinely new business, even though the customer paid for a full year upfront. This is the piece that used to be done manually per policy. Although business subscribing just for 1 month have a filter that can help them indicate if its a renewal or new purchase
 
 ### 3. Data Integration Layer (Google Apps Script)
 A scheduled script (`setupAndMergeSheetsWithEnhancements`) runs on an automated trigger to:
@@ -64,10 +64,10 @@ A scheduled script (`setupAndMergeSheetsWithEnhancements`) runs on an automated 
 - Deduplicate using a composite key (Serial Number + Date + Product + Agent) so re-running the merge never creates duplicate entries
 - Enrich each row with derived **Year**, **Month**, **Quarter**, and **ISO Week** fields for trend analysis
 - Append clean rows into a single **Master** sheet
-- Log every run — timestamp, sheet name, rows merged — to a dedicated **Merge Log** tab for auditability
+- Log every run - timestamp, sheet name, rows merged - to a dedicated **Merge Log** tab for auditability
 - Send a success/failure email notification after every run
 
-A companion script (`setDatePickersInColumnB`) enforces date-picker validation on every state tab, so agents can only submit correctly formatted dates — preventing the kind of malformed input that silently breaks downstream date logic.
+A companion script (`setDatePickersInColumnB`) enforces date-picker validation on every state tab, so agents can only submit correctly formatted dates - preventing the kind of malformed input that silently breaks downstream date logic.
 
 ### 4. Reporting Layer
 A **Filtered View** sheet formats the Master data (currency formatting, cleaned columns) for consumption by external tools. A **Pivot Table** tab provides a spreadsheet-native cross-check of premium generated and commission by state and agent, independent of the dashboard.
@@ -82,7 +82,7 @@ The live dashboard connects directly to the Filtered View and surfaces:
 
 # Data Description
 
-Each state sheet — and the resulting Master sheet — captures the following fields:
+Each state sheet - and the resulting Master sheet - captures the following fields:
 
 **S/N (Number):** A sequential record identifier within the state tab.
 
@@ -104,7 +104,7 @@ Each state sheet — and the resulting Master sheet — captures the following f
 
 **Qty Sold (Number):** Units/policies sold in the transaction.
 
-**Duration (Text):** The billing cycle purchased — Monthly, Quarterly, Bi-annual, or Annual.
+**Duration (Text):** The billing cycle purchased - Monthly, Quarterly, Bi-annual, or Annual.
 
 **Total Amount (Currency):** The full amount paid by the customer.
 
@@ -158,14 +158,14 @@ function setDatePickersInColumnB() {
 
 # Project Scope
 
-1. **Data Collection Design** — structuring state-level tabs with restricted, agent-specific permissions.
-2. **Data Integration** — building the Apps Script merge pipeline with deduplication and audit logging.
-3. **Commission Logic Design** — translating the company's tiered, product-specific commission structure into a single dynamic formula.
-4. **Data Visualization** — connecting the cleaned dataset to Looker Studio and designing a real-time performance dashboard.
-5. **Monitoring & Reliability** — automated email alerts and a merge log to catch pipeline failures early.
+1. **Data Collection Design** - structuring state-level tabs with restricted, agent-specific permissions.
+2. **Data Integration** - building the Apps Script merge pipeline with deduplication and audit logging.
+3. **Commission Logic Design** - translating the company's tiered, product-specific commission structure into a single dynamic formula.
+4. **Data Visualization** - connecting the cleaned dataset to Looker Studio and designing a real-time performance dashboard.
+5. **Monitoring & Reliability** - automated email alerts and a merge log to catch pipeline failures early.
 
 # This screenshot captures highlights of the following:
-- Sales Agents Performance Dashboard — overview KPIs and month-on-month trend
+- Sales Agents Performance Dashboard - overview KPIs and month-on-month trend
 <img width="1360" height="1022" alt="WhatsApp Image 2026-07-01 at 9 16 11 AM" src="https://github.com/user-attachments/assets/942e33f5-0fcc-4356-86ed-ec664798919c" />
 <img width="1338" height="1002" alt="WhatsApp Image 2026-07-01 at 10 01 22 AM" src="https://github.com/user-attachments/assets/80dc4c7e-dfe4-4bfd-b010-2141f006216b" />
 
@@ -184,7 +184,7 @@ function setDatePickersInColumnB() {
 
 # Conclusion
 
-This project moved MyCoverGenius's external agent network from manual, after-the-fact commission tracking to a real-time, automated pipeline. Sales entered by agents in any of the seven state sheets flow — without manual intervention — into a deduplicated master dataset, get commission-calculated automatically against the correct product and tier, and surface within minutes on a live dashboard. The state-level permissioning also closes a data integrity gap that existed when commissions were reconciled manually.
+This project moved MyCoverGenius's external agent network from manual, after-the-fact commission tracking to a real-time, automated pipeline. Sales entered by agents in any of the seven state sheets flow - without manual intervention; into a deduplicated master dataset, get commission-calculated automatically against the correct product and tier, and surface within minutes on a live dashboard. The state-level permissioning also closes a data integrity gap that existed when commissions were reconciled manually.
 
 # Strategic Recommendations Implemeneted on Phase 2 of this Project
 
@@ -198,12 +198,12 @@ This project moved MyCoverGenius's external agent network from manual, after-the
 
 # The Way Forward
 
-As MCG's agent network grows, this system is designed to scale without redesign — new states slot into the existing merge logic, and new products can be added to the commission formula as additional branches. The next phase of this project focuses on tightening the feedback loop between the dashboard and the agents themselves, so performance data drives faster, more transparent commission conversations.
+As MCG's agent network grows, this system is designed to scale without redesign - new states slot into the existing merge logic, and new products can be added to the commission formula as additional branches. The next phase of this project focuses on tightening the feedback loop between the dashboard and the agents themselves, so performance data drives faster, more transparent commission conversations.
 
 # How to Use
 
 1. Each state's sales agents record their sales directly into their permissioned state tab in the Google Sheet.
 2. The Apps Script trigger (`setupAndMergeSheetsWithEnhancements`) runs automatically on a schedule, merging and deduplicating new entries into the Master sheet.
-3. The commission formula calculates each row's commission automatically at the point of entry — no manual computation required.
+3. The commission formula calculates each row's commission automatically at the point of entry - no manual computation required.
 4. The Filtered View sheet feeds the Looker Studio dashboard, which updates as new data lands in Master.
-5. Management reviews live performance via the [Looker Studio dashboard link](https://datastudio.google.com/u/0/reporting/9412be12-7f6c-498b-8989-8d115f9481cf/page/p_i74ejzmurd/edit) — no manual report compilation needed.
+5. Management reviews live performance via the [Looker Studio dashboard link](https://datastudio.google.com/u/0/reporting/9412be12-7f6c-498b-8989-8d115f9481cf/page/p_i74ejzmurd/edit) - no manual report compilation needed.
