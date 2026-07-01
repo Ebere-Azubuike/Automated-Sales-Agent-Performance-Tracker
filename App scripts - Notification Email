@@ -1,0 +1,9 @@
+function sendNotificationEmail(success = true, message = "") {
+  var recipient = "eberechukwu@gmail.com"; #you can replace my mail with your own mail
+  var subject = success ? "Merge Success ✅" : "Merge Failed ❌";
+  var body = success
+    ? "✅ The script to merge sheets into 'Master' ran successfully.\n\n" + message
+    : "❌ The merge script encountered an error.\n\n" + message;
+
+  MailApp.sendEmail(recipient, subject, body);
+}
