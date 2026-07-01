@@ -167,11 +167,11 @@ function setDatePickersInColumnB() {
 # This screenshot captures highlights of the following:
 - Sales Agents Performance Dashboard - overview KPIs and month-on-month trend
 <img width="1360" height="1022" alt="WhatsApp Image 2026-07-01 at 9 16 11 AM" src="https://github.com/user-attachments/assets/942e33f5-0fcc-4356-86ed-ec664798919c" />
-<img width="1338" height="1002" alt="WhatsApp Image 2026-07-01 at 10 01 22 AM" src="https://github.com/user-attachments/assets/80dc4c7e-dfe4-4bfd-b010-2141f006216b" />
 
 
 - Agent Leaderboard and Sales by State
-- ![Uploading WhatsApp Image 2026-07-01 at 10.01.22 AM.jpeg…]()
+<img width="1338" height="1002" alt="WhatsApp Image 2026-07-01 at 10 01 22 AM" src="https://github.com/user-attachments/assets/80dc4c7e-dfe4-4bfd-b010-2141f006216b" />
+
 
 - Google Sheets → Looker Studio connection setup
 - <img width="1600" height="667" alt="WhatsApp Image 2026-07-01 at 9 55 08 AM" src="https://github.com/user-attachments/assets/00a171c4-33d5-4d62-9cff-1475315381b4" />
@@ -180,11 +180,12 @@ function setDatePickersInColumnB() {
 - <img width="1600" height="944" alt="WhatsApp Image 2026-07-01 at 8 58 01 AM" src="https://github.com/user-attachments/assets/a599f7ac-a9da-41ef-b701-cd438e41acaf" />
 
 - Commission formula in the sheet
-<img width="1600" height="667" alt="WhatsApp Image 2026-07-01 at 9 55 08 AM" src="https://github.com/user-attachments/assets/95dc682f-9c9d-41b1-83c7-44611913de22" />
+<img width="1574" height="1102" alt="WhatsApp Image 2026-07-01 at 10 06 40 AM" src="https://github.com/user-attachments/assets/e39580fa-ff6d-4048-b995-8d5821f0abc2" />
+
 
 # Conclusion
 
-This project moved MyCoverGenius's external agent network from manual, after-the-fact commission tracking to a real-time, automated pipeline. Sales entered by agents in any of the seven state sheets flow - without manual intervention; into a deduplicated master dataset, get commission-calculated automatically against the correct product and tier, and surface within minutes on a live dashboard. The state-level permissioning also closes a data integrity gap that existed when commissions were reconciled manually.
+This project moved MCG's external agent network from manual, after-the-fact commission tracking to a real-time, automated pipeline. Sales entered by agents in any of the seven state sheets flow - without manual intervention; into a deduplicated master dataset, get commission-calculated automatically against the correct product and tier, and surface within minutes on a live dashboard. The state-level permissioning also closes a data integrity gap that existed when commissions were reconciled manually.
 
 # Strategic Recommendations Implemeneted on Phase 2 of this Project
 
