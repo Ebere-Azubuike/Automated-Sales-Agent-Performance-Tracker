@@ -98,7 +98,7 @@ Each state sheet - and the resulting Master sheet - captures the following field
 
 **Product Category (Text):** The broad product line (currently Health).
 
-**Product Name (Text):** The specific plan sold (Flexicare, Zencare Plus, PrimeCare, etc.).
+**Product Name (Text):** The specific plan sold (Marine, Auto Insurance, Health Insurance, etc.).
 
 **Price (Currency):** The base price of the plan.
 
