@@ -1,9 +1,9 @@
 # Automated-Sales-Agent-Performance-Tracker
 Real-Time Multi-State Sales &amp; Commission Tracking System for External Sales Agents
 
-**Click on the link to view the Looker Studio Dashboard**
-  **Click on the[Looker Studio dashboard link](https://datastudio.google.com/u/0/reporting/9412be12-7f6c-498b-8989-8d115f9481cf/page/p_i74ejzmurd/edit) to view the Looker Studio Dashboard**
-*(https://datastudio.google.com/u/0/reporting/9412be12-7f6c-498b-8989-8d115f9481cf/page/p_i74ejzmurd/edit)*
+
+  **Click on the[Looker Studio dashboard link](https://datastudio.google.com/u/0/reporting/9412be12-7f6c-498b-8989-8d115f9481cf/page/p_i74ejzmurd/edit) to view the Dashboard**
+
 Management reviews live performance via the Looker Studio dashboard link - no manual report compilation needed.
 # Business Problem
 
