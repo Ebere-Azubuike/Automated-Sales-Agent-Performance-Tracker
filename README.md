@@ -29,7 +29,7 @@ MCG works with a network of external sales agents spread across six Nigerian sta
 
 4. **Scalability:** The architecture (per-state sheet → automated merge → master dataset → dashboard) is built to onboard new states or agents without a structural redesign.
 
-5. **Transparency & Accountability:** Giving both agents and management visibility into individual and aggregate performance — including a leaderboard — supports faster commission reconciliation and healthy performance competition.
+5. **Transparency & Accountability:** Giving both agents and management visibility into individual and aggregate performance - including a leaderboard - supports faster commission reconciliation and healthy performance competition.
 
 # Aim of Project
 
@@ -43,7 +43,7 @@ MCG works with a network of external sales agents spread across six Nigerian sta
 
 5. **Operational Monitoring:** Maintain an audit trail of every data merge and trigger automated alerts so pipeline failures are caught immediately, not discovered days later.
 
-# System Architecture — How It Works
+# System Architecture - How I Orchestrated It
 
 This isn't a static dataset; it's an end-to-end pipeline with five layers.
 
@@ -51,12 +51,12 @@ This isn't a static dataset; it's an end-to-end pipeline with five layers.
 Each state (Ogun, Oyo, Ondo, Osun, Ekiti, Kwara, Lagos) has its own protected tab within the workbook. Sheet-level permissions ensures an agent working in, say, Oyo State cannot see or edit entries in the Ogun State tab, and vice versa. Every tab captures the same structured fields, so downstream automation can treat all seven tabs identically.
 
 ### 2. Dynamic Commission Engine
-I placed every sales row calculates its own commission through a single nested formula that branches on three variables at once:
+I placed every sales row to calculate its own commission through a single nested formula that branches on three variables at once:
 - **Product** — All Health product variants, Life Insurance, motor comprehensive/third-party, Fire & Burglary, GIT, Marine, Credit Life, and more
-- **Purchase Type** — New Purchase vs. Renewal (new business earns a materially higher rate)
+- **Purchase Type** — New Purchase vs. Renewals (new business earns a materially higher rate)
 - **Payment Duration** — Monthly, Quarterly, Bi-annual, or Annual
 
-For annual, bi-annual, and quarterly **New Purchases**, the formula blends the first billing period at the "new business" rate with the remaining periods at the "renewal" rate — because only the first cycle represents genuinely new business, even though the customer paid for a full year upfront. This is the piece that used to be done manually per policy.
+For annual, bi-annual,and quarterly **New Purchases**, the formula blends the first billing period at the "new business" rate with the remaining periods at the "renewal" rate — because only the first cycle represents genuinely new business, even though the customer paid for a full year upfront. This is the piece that used to be done manually per policy. Although business subscribing just for 1 month have a filter that can help them indicate if its a renewal or new purchase
 
 ### 3. Data Integration Layer (Google Apps Script)
 A scheduled script (`setupAndMergeSheetsWithEnhancements`) runs on an automated trigger to:
@@ -117,6 +117,7 @@ Each state sheet — and the resulting Master sheet — captures the following f
 **Commission (Currency):** The commission owed to the agent, calculated automatically by the dynamic formula described above.
 
 **Year / Month / Quarter / Week (Derived):** Added automatically during the merge into Master, enabling time-based analysis without manual date parsing.
+<img width="1600" height="51" alt="WhatsApp Image 2026-07-01 at 8 58 00 AM (1)" src="https://github.com/user-attachments/assets/8e38fb18-5bed-4d3b-a08e-bcdfd98e3b4a" />
 
 # Automation Scripts
 
